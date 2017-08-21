@@ -8,14 +8,15 @@ boolean debugging=false;
 Prisma verde,verdeH;
 Prisma blanco,blancoH;
 int anguloprisma[]={
-    1,-1,1,-1,
-    -1,1,-1,1,
-    1,-1,1,-1,
-    -1,1,-1,1,
-    1,-1,1,-1,
-    -1,1,-1,1
-} /*bola */;
-/*int anguloprisma[]={
+    1,1,1,1,
+    -1,-1,-1,-1,
+    1,1,1,1,
+    -1,-1,-1,-1,
+    1,1,1,1,
+    -1,-1,-1,-1
+}; //bola
+/*
+int anguloprisma[]={
     0,0,0,0,0,0,
     0,0,0,0,0,0,
     0,0,0,0,0,0,
@@ -94,51 +95,77 @@ float angZ=0;
 float tX=0,tY=0,tZ=0;
 void draw(){
   int f;
+  if (debugging) { iprisma=4; }
   
- background(80,80,150);
-  text (str(angX),10,10);
-  text (str(angY),10,30);
-  text (str(angZ),10,50);
-  text(str(tX),100,10);
-  text(str(tY),100,30);
-  text(str(tZ),100,50);
+  background(80,80,150);
+  if (debugging) {
+    text (str(angX),10,10);
+    text (str(angY),10,30);
+    text (str(angZ),10,50);
+    text(str(tX),100,10);
+    text(str(tY),100,30);
+    text(str(tZ),100,50);
     text(str(iprisma),100,70);
+
+  }
+  text("Formula: ",10,height-100);
+  for (f=0;f<anguloprisma.length;f++){
+    anguloprisma[f]=(anguloprisma[f]+4) % 4;
+    text(str(anguloprisma[f])+"/",100+20*f,height-100);
+  }
   //beginCamera();
 
     translate(width/2,height/2,-500);
     rotate(TWO_PI*frameCount/360);
     rotateX(TWO_PI*frameCount/360);
-    
-  for (f=0;f<anguloprisma.length;f++){  
-    if (f % 2==0) {
-      if (f==iprisma){
-        verdeH.draw();
-        
-      }else {
-        verde.draw();
-        
+
+    //Guardamos la posición del prisma activo.
+      pushMatrix();
+    //Dibujamos desde el prisma activo hasta el final.
+    for (f=iprisma;f<anguloprisma.length;f++){  
+      if (f % 2==0) {
+          if (iprisma==f) { verdeH.draw();  } else { verde.draw(); }
+      rotate(HALF_PI*anguloprisma[f]);
+      } else {
+        if (iprisma==f) { blancoH.draw();  } else { blanco.draw(); }      
+        rotate(-HALF_PI*anguloprisma[f]);
       }
-    } else {
-      if (f==iprisma){
-        blancoH.draw();
-      }else {
-        blanco.draw();
-        
-      }
+      rotateX(-PI);
+      rotateY(-HALF_PI);
+      translate(200.0,0.0,0.0);
+      
+      
     }
-    rotateX(-PI);
-    rotate(HALF_PI*anguloprisma[f]);
-    rotateY(-HALF_PI);
-    translate(200.0,0.0,0.0);
-    
-    
+    //Volvemos al prisma activo y giramos del revés
+    //para dibujar los prismas anteriores.
+    popMatrix();
+    rotate(-PI);
+    rotateX(PI);
+    translate(200,0,0);
     if (debugging) {
-      rotateX (angX*HALF_PI);
-      rotateY (angY*HALF_PI);
-      rotate(angZ*HALF_PI);
-      translate(tX,tY,tZ);
+       
+        rotateX (angX*HALF_PI);
+        rotateY (angY*HALF_PI);
+        rotate(angZ*HALF_PI);
+        translate(tX,tY,tZ);
+       
+      }
+  
+    
+    for (f=iprisma-1;f>=0;f--){  
+      if (f % 2==0) {
+        
+        rotateX(-HALF_PI*anguloprisma[f]);
+        verde.draw();  
+    } else {
+        rotateX(HALF_PI*anguloprisma[f]);
+        blanco.draw(); 
+
     }
-  }
+      rotateX(-PI);
+      rotateY(-HALF_PI);
+      translate(200.0,0.0,0.0);
+    }
  
  //endCamera();
  }
