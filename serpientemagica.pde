@@ -241,7 +241,7 @@ void draw(){
           if (anguloprisma[iprisma]<0){ anguloprisma[iprisma]=3;}
           break;
      }
-     if (iprisma<0) iprisma=12;
+     if (iprisma<0) iprisma=anguloprisma.length-1;
      if (iprisma>=anguloprisma.length) iprisma=anguloprisma.length-1;
    }
  }
