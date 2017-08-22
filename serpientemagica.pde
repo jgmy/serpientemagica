@@ -9,7 +9,7 @@ import android.view.KeyEvent;
 boolean debugging=false;
 Prisma verde,verdeH;
 Prisma blanco,blancoH;
-int anguloprisma[]={
+/*int anguloprisma[]={
     1,1,1,1,
     -1,-1,-1,-1,
     1,1,1,1,
@@ -17,7 +17,27 @@ int anguloprisma[]={
     1,1,1,1,
     -1,-1,-1,-1
 }; //bola
+*/
 /*
+int anguloprisma[]={
+    1,1,1,1,
+    3,0,0,0,
+    0,0,0,3,
+    1,1,1,1,
+    3,0,0,0,
+    0,0,0,3
+}; //hueso
+*/
+/*
+int anguloprisma[]={
+    1,1,1,1,
+    3,2,0,2,
+    2,0,2,3,
+    1,1,1,1,
+    3,2,0,2,
+    2,0,2,3
+}; //cruz rara
+*//*
 int anguloprisma[]={
     0,0,0,0,0,0,
     0,0,0,0,0,0,
@@ -25,6 +45,13 @@ int anguloprisma[]={
     0,0,0,0,0,0
 } ; //recto 
 */
+
+int anguloprisma[]={
+    1,1,1,1,3,1,1,3,
+    1,1,1,1,3,1,1,3,
+    1,1,1,1,3,1,1,3
+} ; //roseta
+
 int iprisma=0;
 class Prisma{
   public PShape shape;
@@ -196,11 +223,18 @@ void draw(){
      }
    } else {
       switch(keyCode){
-        case LEFT: case  android.view.KeyEvent.KEYCODE_VOLUME_UP : iprisma++; break;
-        case RIGHT: case android.view.KeyEvent.KEYCODE_VOLUME_DOWN: iprisma--; break;
-        case UP: case MENU:
+        case LEFT: 
+        case  android.view.KeyEvent.KEYCODE_VOLUME_UP: 
+          iprisma++; 
+          break;
+        case RIGHT: 
+        case android.view.KeyEvent.KEYCODE_VOLUME_DOWN: 
+          iprisma--; 
+          break;
+        case UP: 
+        case MENU:
           anguloprisma[iprisma]++; 
-          if (anguloprisma[iprisma]>4){ anguloprisma[iprisma]=0; }
+          if (anguloprisma[iprisma]>=4){ anguloprisma[iprisma]=0; }
           break;
         case DOWN:
           anguloprisma[iprisma]--; 
