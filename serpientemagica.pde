@@ -4,6 +4,8 @@
 //cada triángulo: rotateX (HALF_PI), rotateY(PI), translate (200,0,0).
 //(suponiendo el tamaño 100);
 
+
+import android.view.KeyEvent;
 boolean debugging=false;
 Prisma verde,verdeH;
 Prisma blanco,blancoH;
@@ -80,7 +82,7 @@ class Prisma{
 
 
 void setup(){
-  size(1024,768,P3D);
+  size(displayWidth,displayHeight,P3D);
   colorMode(RGB);
   verde=new Prisma(color(0,128,0), color(0,0,0));
   verdeH=new Prisma(color(0,255,0),color(255,255,255));
@@ -99,6 +101,7 @@ void draw(){
   
   background(80,80,150);
   if (debugging) {
+    textSize (16);
     text (str(angX),10,10);
     text (str(angY),10,30);
     text (str(angZ),10,50);
@@ -108,10 +111,11 @@ void draw(){
     text(str(iprisma),100,70);
 
   }
-  text("Formula: ",10,height-100);
+  textSize (min (height/25, width/30));
+  text("Formula: ",10,height*0.90);
   for (f=0;f<anguloprisma.length;f++){
     anguloprisma[f]=(anguloprisma[f]+4) % 4;
-    text(str(anguloprisma[f])+"/",100+20*f,height-100);
+    text(str(anguloprisma[f])+"/",textWidth ("Fórmula: ")+f*textWidth("4/"),height*0.90);
   }
   //beginCamera();
 
@@ -192,9 +196,9 @@ void draw(){
      }
    } else {
       switch(keyCode){
-        case LEFT: iprisma++; break;
-        case RIGHT: iprisma--; break;
-        case UP:
+        case LEFT: case  android.view.KeyEvent.KEYCODE_VOLUME_UP : iprisma++; break;
+        case RIGHT: case android.view.KeyEvent.KEYCODE_VOLUME_DOWN: iprisma--; break;
+        case UP: case MENU:
           anguloprisma[iprisma]++; 
           if (anguloprisma[iprisma]>4){ anguloprisma[iprisma]=0; }
           break;
@@ -207,3 +211,4 @@ void draw(){
      if (iprisma>=anguloprisma.length) iprisma=anguloprisma.length-1;
    }
  }
+ 
