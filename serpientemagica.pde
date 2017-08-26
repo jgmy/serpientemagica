@@ -4,9 +4,11 @@
 //cada triángulo: rotateX (HALF_PI), rotateY(PI), translate (200,0,0).
 //(suponiendo el tamaño 100);
 
+// For android support, replace the double-slash slash-asterisk ANDROID asteris-slash with empty space.
+// /*ANDROID */ import android.view.KeyEvent;
 
-import android.view.KeyEvent;
 boolean debugging=false;
+boolean demo=true;
 Prisma verde,verdeH;
 Prisma blanco,blancoH;
 /*int anguloprisma[]={
@@ -27,8 +29,7 @@ int anguloprisma[]={
     3,0,0,0,
     0,0,0,3
 }; //hueso
-*/
-/*
+*//*
 int anguloprisma[]={
     1,1,1,1,
     3,2,0,2,
@@ -39,18 +40,17 @@ int anguloprisma[]={
 }; //cruz rara
 *//*
 int anguloprisma[]={
+    1,1,1,1,3,1,1,3,
+    1,1,1,1,3,1,1,3,
+    1,1,1,1,3,1,1,3
+} ; //roseta
+*/
+int anguloprisma[]={
     0,0,0,0,0,0,
     0,0,0,0,0,0,
     0,0,0,0,0,0,
     0,0,0,0,0,0
 } ; //recto 
-*/
-
-int anguloprisma[]={
-    1,1,1,1,3,1,1,3,
-    1,1,1,1,3,1,1,3,
-    1,1,1,1,3,1,1,3
-} ; //roseta
 
 int iprisma=0;
 class Prisma{
@@ -116,7 +116,9 @@ void setup(){
   
   blanco=new Prisma(color(128,128,128),color(0,0,0));
   blancoH=new Prisma(color(255,255,255),color(0,255,0));
+  if (demo) demoSetup();
 }
+
 
 
 float angX=0,angY=0;
@@ -138,8 +140,10 @@ void draw(){
     text(str(iprisma),100,70);
 
   }
+  if (demo) { demoDraw(); }
+  
   textSize (min (height/25, width/30));
-  text("Formula: ",10,height*0.90);
+  text("Fórmula: ",10,height*0.90);
   for (f=0;f<anguloprisma.length;f++){
     anguloprisma[f]=(anguloprisma[f]+4) % 4;
     text(str(anguloprisma[f])+"/",textWidth ("Fórmula: ")+f*textWidth("4/"),height*0.90);
@@ -203,6 +207,9 @@ void draw(){
  
  
  void keyPressed(){
+   /* if (demo) {
+     demo=false;
+   } */
    if (debugging) {
      switch(key){
        case 'X': angX++; break;
@@ -224,15 +231,18 @@ void draw(){
    } else {
       switch(keyCode){
         case LEFT: 
-        case  android.view.KeyEvent.KEYCODE_VOLUME_UP: 
+        // /*ANDROID */ case  android.view.KeyEvent.KEYCODE_VOLUME_UP:
+        
           iprisma++; 
           break;
         case RIGHT: 
-        case android.view.KeyEvent.KEYCODE_VOLUME_DOWN: 
+        // /*ANDROID */case android.view.KeyEvent.KEYCODE_VOLUME_DOWN:
+       
           iprisma--; 
           break;
         case UP: 
-        case MENU:
+        // /*ANDROID */ case MENU:
+        
           anguloprisma[iprisma]++; 
           if (anguloprisma[iprisma]>=4){ anguloprisma[iprisma]=0; }
           break;
@@ -245,4 +255,8 @@ void draw(){
      if (iprisma>=anguloprisma.length) iprisma=anguloprisma.length-1;
    }
  }
- 
+ void centerText(String t, float y){
+   textAlign(CENTER);
+   text(t,(width)/2,y); 
+   textAlign(RIGHT);
+ }
