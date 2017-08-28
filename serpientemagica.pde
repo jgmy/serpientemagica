@@ -208,9 +208,9 @@ void draw(){
  
  
  void keyPressed(){
-   /* if (demo) {
+   if (demo) {
      demo=false;
-   } */
+   } 
    if (debugging) {
      switch(key){
        case 'X': angX++; break;
