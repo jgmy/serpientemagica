@@ -5,7 +5,7 @@
 //(suponiendo el tamaño 100);
 
 // For android support, replace the double-slash slash-asterisk ANDROID asteris-slash with empty space.
-// /*ANDROID */ import android.view.KeyEvent;
+/*ANDROID */ import android.view.KeyEvent;
 
 boolean debugging=false;
 boolean demo=true;
@@ -152,6 +152,7 @@ void draw(){
 
     translate(width/2,height/2,-500);
     rotate(TWO_PI*frameCount/360);
+    //rotateY(-QUARTER_PI);
     rotateX(TWO_PI*frameCount/360);
 
     //Guardamos la posición del prisma activo.
@@ -231,17 +232,17 @@ void draw(){
    } else {
       switch(keyCode){
         case LEFT: 
-        // /*ANDROID */ case  android.view.KeyEvent.KEYCODE_VOLUME_UP:
+        /*ANDROID */ case  android.view.KeyEvent.KEYCODE_VOLUME_UP:
         
           iprisma++; 
           break;
         case RIGHT: 
-        // /*ANDROID */case android.view.KeyEvent.KEYCODE_VOLUME_DOWN:
+        /*ANDROID */case android.view.KeyEvent.KEYCODE_VOLUME_DOWN:
        
           iprisma--; 
           break;
         case UP: 
-        // /*ANDROID */ case MENU:
+       /*ANDROID */ case MENU:
         
           anguloprisma[iprisma]++; 
           if (anguloprisma[iprisma]>=4){ anguloprisma[iprisma]=0; }
