@@ -82,9 +82,9 @@ void guiSetup(){
   float cr;
   cr=min(width,height)/10;
   
-  circles= (Circle[]) append(circles, new Circle(width/2-(cr*1.5),height-cr*2,cr,LEFT));
-  circles= (Circle[]) append(circles, new Circle(width/2+(cr*1.5),height-cr*2,cr,RIGHT));
-  circles= (Circle[]) append(circles,new Circle(width/2, height-cr*2,cr,UP));
+  circles= (Circle[]) append(circles, new Circle(width/2-(cr*1.5),height*0.9-cr,cr,LEFT));
+  circles= (Circle[]) append(circles, new Circle(width/2+(cr*1.5),height*0.9-cr,cr,RIGHT));
+  circles= (Circle[]) append(circles,new Circle(width/2, height*0.9-cr,cr,UP));
   
 }
 
@@ -97,14 +97,14 @@ void guiDraw(){
  }
 }
 
-void mouseClicked(){
+void mousePressed(){
   int code=-1;
   for (int i=0; i<circles.length; i++){
      if (circles[i].insideCircle(mouseX,mouseY)){
        code=circles[i].code; 
      }
  }
- if (demo && (code!=-1)){
+ if (demo ){
      demo=false;
  }
  switch(code){
