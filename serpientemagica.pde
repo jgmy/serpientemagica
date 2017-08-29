@@ -5,10 +5,11 @@
 //(suponiendo el tamaño 100);
 
 // For android support, replace the double-slash slash-asterisk ANDROID asteris-slash with empty space.
-/*ANDROID */ import android.view.KeyEvent;
+///*ANDROID */ import android.view.KeyEvent;
 
 boolean debugging=false;
 boolean demo=true;
+boolean gui=true;
 Prisma verde,verdeH;
 Prisma blanco,blancoH;
 /*int anguloprisma[]={
@@ -116,6 +117,7 @@ void setup(){
   
   blanco=new Prisma(color(128,128,128),color(0,0,0));
   blancoH=new Prisma(color(255,255,255),color(0,255,0));
+  if (gui) guiSetup();
   if (demo) demoSetup();
 }
 
@@ -129,6 +131,7 @@ void draw(){
   if (debugging) { iprisma=4; }
   
   background(80,80,150);
+  guiDraw();
   if (debugging) {
     textSize (16);
     text (str(angX),10,10);
@@ -148,6 +151,8 @@ void draw(){
     anguloprisma[f]=(anguloprisma[f]+4) % 4;
     text(str(anguloprisma[f])+"/",textWidth ("Fórmula: ")+f*textWidth("4/"),height*0.90);
   }
+
+     
   //beginCamera();
 
     translate(width/2,height/2,-500);
@@ -204,6 +209,7 @@ void draw(){
     }
  
  //endCamera();
+   
  }
  
  
@@ -232,18 +238,17 @@ void draw(){
    } else {
       switch(keyCode){
         case LEFT: 
-        /*ANDROID */ case  android.view.KeyEvent.KEYCODE_VOLUME_UP:
+///*ANDROID */ case  android.view.KeyEvent.KEYCODE_VOLUME_UP:
         
           iprisma++; 
           break;
         case RIGHT: 
-        /*ANDROID */case android.view.KeyEvent.KEYCODE_VOLUME_DOWN:
+///*ANDROID */case android.view.KeyEvent.KEYCODE_VOLUME_DOWN:
        
           iprisma--; 
           break;
         case UP: 
-       /*ANDROID */ case MENU:
-        
+///*ANDROID */ case MENU:
           anguloprisma[iprisma]++; 
           if (anguloprisma[iprisma]>=4){ anguloprisma[iprisma]=0; }
           break;
